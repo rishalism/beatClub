@@ -206,12 +206,14 @@
                         </tbody>
                     </table>
                     <button id="resetButton" class="btn btn-danger">Reset Numbers</button>
-                    <a href="https://docs.google.com/spreadsheets/d/1COdEVOc67RttsTCe9wa1fjkF76-OjksLmpgP2eWQ4bQ/edit?usp=sharing"><button class="btn btn-success">Fine chart</button></a>
+                    <a
+                        href="https://docs.google.com/spreadsheets/d/1COdEVOc67RttsTCe9wa1fjkF76-OjksLmpgP2eWQ4bQ/edit?usp=sharing"><button
+                            class="btn btn-success">Fine chart</button></a>
                 </div>
         </div>
         <!-- Service End -->
 
-        
+
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -238,13 +240,25 @@
             });
 
             resetButton.addEventListener("click", function () {
-                // Reset all counts to 0 and update localStorage
-                buttons.forEach(function (button) {
-                    const memberId = button.getAttribute("data-member-id");
-                    const countElement = document.getElementById(memberId);
-                    countElement.textContent = "0";
-                    localStorage.setItem(memberId, "0");
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, reset !"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        buttons.forEach(function (button) {
+                            const memberId = button.getAttribute("data-member-id");
+                            const countElement = document.getElementById(memberId);
+                            countElement.textContent = "0";
+                            localStorage.setItem(memberId, "0");
+                        });
+                    }
                 });
+                // Reset all counts to 0 and update localStorage
             });
 
             // Retrieve and update counts from localStorage
@@ -270,6 +284,8 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
